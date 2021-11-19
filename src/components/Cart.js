@@ -1,17 +1,20 @@
-import React from 'react'
-import { CartItem } from './CartItem'
+import React from "react";
+import { CartItem } from "./CartItem";
+import { useSelector } from "react-redux";
 
 export const Cart = () => {
   // TODO - fetch products from the cart store
-  const products = []
+  const products = useSelector((store) => store.cart.items);
 
   // TODO - calculate total from the sum of all products in the cart
-  const totalPrice = 0
+  const totalPrice = useSelector((store) => store.cart.items.reduce((total, item) => total + item.price * item.quantity, 0));
 
   return (
     <div className="cart">
       <div className="total">
-        <span className="emoji" role="img" aria-label="cart">🛒</span>
+        <span className="emoji" role="img" aria-label="cart">
+          🛒
+        </span>
         <div className="amount">Total: {totalPrice}:-</div>
       </div>
 
@@ -21,5 +24,5 @@ export const Cart = () => {
         ))}
       </ul>
     </div>
-  )
-}
+  );
+};
